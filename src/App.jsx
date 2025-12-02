@@ -1,17 +1,39 @@
-import { useState } from "react"
+import { CartProvider } from "./Components/cartContext";
 import Header from "./Components/header"
 import Lightbox from "./Components/lightbox"
+import { useState } from "react"
+import { data } from "./data"
+import { useCart } from "./Components/cartContext";
 import "./index.css"
-import { data } from "./data";
 
-function App() {
-  const [products] = useState(data)
-  const [value, setValue] = useState(0)
-  const [amount, setAmount] = useState(0)
-  const [slideIndex, setSlideIndex] = useState(1)
-  const [showLightbox, setShowLightbox] = useState(false)
+function ProductInfo() {
+  const [products] = useState(data);
+  const [value, setValue] = useState(0);
+  const [amount, setAmount] = useState(0);
+  const [slideIndex, setSlideIndex] = useState(1);
+  const [showLightbox, setShowLightbox] = useState(false);
 
   const { mainImage } = products[value]
+  const { addItem, openCart } = useCart();
+
+  const handleAddToCart = () => {
+    if (amount <= 0) return;
+
+    const currentProduct = products[value];
+
+    addItem({
+      id: currentProduct.id,
+      title: currentProduct.title,
+      price: currentProduct.price,
+      thumbnail: currentProduct.thumbnail,
+      quantity: amount,
+    });
+
+    if (typeof openCart === "function") openCart();
+
+    setAmount(0);
+  }
+
 
   const nextSlide = () => {
     if (slideIndex !== products.length) {
@@ -28,10 +50,10 @@ function App() {
       setSlideIndex(products.length)
   }
 
-  const decrease = () => {
-    setAmount(amount - 1)
-    if (amount < 1) setAmount(0);
-  };
+ const decrease = () => {
+  setAmount(prev => Math.max(prev - 1, 0));
+};
+
 
   return (
     <>
@@ -74,7 +96,7 @@ function App() {
               onClick={() => setShowLightbox(true)}
             />
           </div>
-
+          {/* <Cart  /> */}
           <ul className="hidden lg:flex items-center justify-start gap-3 flex-wrap mt-5">
             {products.map((item, index) => (
               <li key={item.id} onClick={() => setValue(index)}
@@ -109,11 +131,12 @@ function App() {
             <ul className="flex items-center bg-slate-100 justify-between py-2 px-4 rounded shadow lg:flex-1">
               <li onClick={decrease} className="cursor-pointer"><img src="./svg-images/icon-minus.svg" alt="" /></li>
               <li>{amount}</li>
-              <li onClick={() => setAmount(amount + 1)} className="cursor-pointer"><img src="./svg-images/icon-plus.svg" alt="" /></li>
+              <li onClick={() => setAmount(prev => prev + 1)} className="cursor-pointer"><img src="./svg-images/icon-plus.svg" alt="" /></li>
             </ul>
 
             <div className="lg:flex-1">
-              <button className=
+              <button onClick={handleAddToCart}
+                className=
                 "flex justify-center gap-4 py-2 px-4 items-center mt-5 font-bold bg-orange-500 transition-all duration-200 rounded-lg lg:mt-0 hover:bg-orange-300 cursor-pointer shadow w-full"><img src="./svg-images/icon-cart.svg" alt="cart" />
                 Add to cart
               </button>
@@ -124,12 +147,15 @@ function App() {
         </article>
 
       </section >
-
-
-
     </>
 
   );
 }
 
-export default App
+export default function App() {
+  return (
+    <CartProvider>
+      <ProductInfo />
+    </CartProvider>
+  )
+}
