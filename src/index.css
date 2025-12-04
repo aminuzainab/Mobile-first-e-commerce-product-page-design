@@ -13,16 +13,17 @@ ul {
 nav {
   position: fixed;
   top: 0;
-  left: -100vw;
-  width: 70%;
+  left: -300px;
+  width: fit-content;
   height: 100%;
-  z-index: 99; 
+  z-index: 99;
+  transition: left 0.3s ease;
+  background: white;
 }
 
 nav.open {
-  top: 0;
   left: 0;
-  @apply shadow-2xl p-8 lg:shadow-none lg:p-0
+  @apply shadow-2xl p-8
 }
 
 li.open {
@@ -30,7 +31,7 @@ li.open {
 }
 
 nav ul {
-  @apply flex items-start flex-col gap-8 mt-12 lg:flex-row lg:items-center lg:gap-6 lg:mt-0;;
+  @apply flex items-start flex-col gap-8 mt-12 lg:flex-row lg:items-center lg:gap-6 lg:mt-0;
 }
 
 nav ul li {
@@ -41,13 +42,17 @@ nav ul li {
   nav {
     position: relative;
     left: 0;
+    top: 0;
     width: auto;
     height: auto;
     z-index: auto;
+    transition: none;
   }
 
   nav.open {
-    background: transparent;
+    background-color: transparent;
+    padding: 0;
+    box-shadow: none;
   }
 
   nav ul {
@@ -60,18 +65,26 @@ nav ul li {
   z-index: 999;
 }
 
+/* #backdrop {
+  position: fixed;
+  width:;
+} */
+
 @media (min-width: 375px) and (max-width: 425px) {
   .close {
     @apply top-10 left-10;
   }
 
+  nav {
+    background: white;
+    border: 1px solid;
+    padding: 0 25px 0 10px;
+    width: 200px;
+    left: -6vw;
+  }
 }
 
 
-body{
+body {
   font-family: 'Kumbh Sans', sans-serif;
 }
-
-
-
-

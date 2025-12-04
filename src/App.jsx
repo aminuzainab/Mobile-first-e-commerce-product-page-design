@@ -7,7 +7,7 @@ import { useCart } from "./Components/cartContext";
 import "./index.css"
 
 function ProductInfo() {
-  const [products] = useState(data);
+  const [products, setProducts] = useState(data);
   const [value, setValue] = useState(0);
   const [amount, setAmount] = useState(0);
   const [slideIndex, setSlideIndex] = useState(1);
@@ -28,8 +28,6 @@ function ProductInfo() {
       thumbnail: currentProduct.thumbnail,
       quantity: amount,
     });
-
-    if (typeof openCart === "function") openCart();
 
     setAmount(0);
   }
@@ -61,6 +59,7 @@ function ProductInfo() {
       {showLightbox && (
         <Lightbox
           products={products}
+          setProducts={setProducts}
           slideIndex={slideIndex}
           nextSlide={nextSlide}
           prevSlide={prevSlide}
@@ -81,14 +80,14 @@ function ProductInfo() {
                   className="w-full lg:rounded-2xl cursor-pointer"
                   onClick={() => setShowLightbox(true)} />
 
-                <ul><button onClick={prevSlide} className="bg-white rounded-full top-1/2 p-3 absolute left-4 -translate-y-1/2 pointer"><img src="./svg-images/icon-previous.svg" alt="" /></button></ul>
-                <ul><button onClick={nextSlide} className="bg-white rounded-full top-1/2 p-3 absolute right-4 -translate-y-1/2"><img src="./svg-images/icon-next.svg" alt="" /></button></ul>
+                <button onClick={prevSlide} className="bg-white rounded-full top-1/2 p-3 absolute left-4 -translate-y-1/2 cursor-pointer"><img src="./svg-images/icon-previous.svg" alt="" /></button>
+                <button onClick={nextSlide} className="bg-white rounded-full top-1/2 p-3 absolute right-4 -translate-y-1/2 cursor-pointer"><img src="./svg-images/icon-next.svg" alt="" /></button>
               </div>
 
             ))}
           </div>
 
-          <div className="hidden lg:block">
+          <div className="hidden lg:block lg:px-6">
             <img
               src={mainImage}
               alt="main-Image"
@@ -97,7 +96,7 @@ function ProductInfo() {
             />
           </div>
           {/* <Cart  /> */}
-          <ul className="hidden lg:flex items-center justify-start gap-3 flex-wrap mt-5">
+          <ul className="hidden lg:flex items-center justify-between flex-wrap mt-5 lg:px-6">
             {products.map((item, index) => (
               <li key={item.id} onClick={() => setValue(index)}
 
@@ -110,7 +109,7 @@ function ProductInfo() {
           </ul>
         </article>
 
-        <article className="px-8 pb-10">
+        <article className="px-8 pb-10 mt-10 lg:pl-12">
           <h2 className="text-slate-600 py-1 text-sm inline-block tracking-wide uppercase font-bold">Sneaker Company</h2>
           <h1 className="text-slate-900 font-bold mb-3 text-2xl lg:text-4xl">Fall Limited Edition Sneakers</h1>
           <p className="text-slate-500 mb-5 leading-relaxed">These low-profile sneakers are your perfect casual wear companion. Featuring a
