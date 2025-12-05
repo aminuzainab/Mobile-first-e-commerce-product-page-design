@@ -96,15 +96,16 @@ function ProductInfo() {
             />
           </div>
           {/* <Cart  /> */}
-          <ul className="hidden lg:flex items-center justify-between flex-wrap mt-5 lg:px-6">
+          <ul className="hidden lg:flex items-center justify-between gap-4 mt-5 lg:px-6">
             {products.map((item, index) => (
-              <li key={item.id} onClick={() => setValue(index)}
+              <li key={item.id}
+               onClick={() => setValue(index)}
 
                 className={
-                  `${index === value && "border-2 border-orange-400 opacity-80"} border-2 border-transparent rounded-xl overflow-Hidden cursor-pointer`
+                  `${index === value && "border-2 border-orange-400 opacity-80"} border-2 border-transparent rounded-xl overflow-hidden cursor-pointer flex-1 hover:scale-105 transition-transform duration-200 `
                 }
 
-              ><img src={item.thumbnail} alt="" className='w-20 rounded-xl' /></li>
+              ><img src={item.thumbnail} alt="" className='w-full h-30 object-cover rounded-xl' /></li>
             ))}
           </ul>
         </article>

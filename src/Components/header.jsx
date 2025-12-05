@@ -12,7 +12,7 @@ function Header() {
   return (
     <>
       <header className="relative flex items-center justify-between p-0 border-b border-slate-400 max-w-7xl mx-auto">
-        <div id='nav-link' className="flex p-5 items-center justify-start gap-0">
+        <div id='nav-link' className="flex items-center justify-start gap-0">
           <ul className="flex items-center justify-between gap-0 ">
             {!isOpen && (<li onClick={() => setIsOpen(true)} className="lg:hidden">
               <img className="cursor-pointer" src="./svg-images/icon-menu.svg" alt="menu" />
@@ -21,7 +21,7 @@ function Header() {
             {isOpen && <li onClick={() => setIsOpen(false)} className="lg:hidden close w-6">
               <img className="cursor-pointer" src="./svg-images/icon-close.svg" alt="close" />
             </li>}
-            <li className='cursor-pointer'>
+            <li className='cursor-pointer ml-4 lg:mr-10 ml-0'>
               <img src="./svg-images/logo.svg" alt="logo" />
             </li>
           </ul>

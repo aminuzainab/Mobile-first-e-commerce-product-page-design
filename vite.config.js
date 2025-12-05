@@ -5,13 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react(),tailwindcss()],
   base: "/Mobile-first-e-commerce-product-page-design/",
 
-  server: {
-    watch: {
-      // ignore editor temp files, system files and node_modules to reduce noisy HMR events
-      ignored: ['**/node_modules/**', '**/.git/**', '**/*.swp', '**/*~', '**/.DS_Store']
-    }
-  }
 })
