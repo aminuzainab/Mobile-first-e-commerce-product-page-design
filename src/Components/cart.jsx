@@ -1,7 +1,20 @@
+import { useRef, useState } from "react";
 import { useCart } from "./cartContext";
 
 export default function Cart() {
-  const { items: cartItems, removeItem } = useCart();
+  const { items: cartItems, removeItem, closeCart } = useCart();
+  const [numberOfItems, setNumberOfItems] = useState(cartItems.length)
+  const checkoutRef = useRef(null)
+
+  const handleCheckout = (e) => {
+    if (e.target === checkoutRef.current) {
+      console.log(checkoutRef.current)
+
+    }
+  }
+
+  document.addEventListener('click', handleCheckout)
+
 
   return (
     <article
@@ -18,30 +31,38 @@ export default function Cart() {
 
       {cartItems.length > 0 &&
         cartItems.map(item => (
-          <div key={item.id} className="flex items-center justify-between mb-6">
-            <img src={item.thumbnail} alt="thumbnail" className="rounded-lg w-14" />
+          <div key={item.id}>
+            <div className="flex items-center justify-between mb-6">
+              <img src={item.thumbnail} alt="thumbnail" className="rounded-lg w-14" />
 
-            <ul>
-              <li className="text-slate-500 text-sm">{item.title}</li>
-              <li className="text-slate-500 text-sm">
-                ${item.price}.00 × {item.quantity}{" "}
-                <span className="font-bold text-slate-800">
-                  ${item.totalPrice}.00
-                </span>
-              </li>
-            </ul>
+              <ul>
+                <li className="text-slate-500 text-sm">{item.title}</li>
+                <li className="text-slate-500 text-sm">
+                  ${item.price}.00 × {item.quantity}{" "}
+                  <span className="font-bold text-slate-800">
+                    ${item.totalPrice}.00
+                  </span>
+                </li>
+              </ul>
 
-            <button onClick={() => removeItem(item.id)}>
-              <img src="/svg-images/icon-delete.svg" alt="delete" />
+              <button onClick={() => removeItem(item.id)}>
+                <img src="./svg-images/icon-delete.svg" alt="delete" />
+              </button>
+            </div>
+            <button
+              onClick={
+                () => {
+                  removeItem(item.id)
+                  closeCart()
+                }
+              }
+              className="py-2 px-4 font-bold bg-orange-500 text-white rounded-lg w-full hover:bg-orange-300">
+              Checkout
             </button>
           </div>
-        ))}
+        ))
 
-      {cartItems.length > 0 && (
-        <button className="py-2 px-4 font-bold bg-orange-500 text-white rounded-lg w-full hover:bg-orange-300">
-          Checkout
-        </button>
-      )}
+      }
     </article>
   );
 }

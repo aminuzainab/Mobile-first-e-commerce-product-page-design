@@ -95,7 +95,7 @@ function ProductInfo() {
               onClick={() => setShowLightbox(true)}
             />
           </div>
-          {/* <Cart  /> */}
+          
           <ul className="hidden lg:flex items-center justify-between gap-4 mt-5 lg:px-6">
             {products.map((item, index) => (
               <li key={item.id}

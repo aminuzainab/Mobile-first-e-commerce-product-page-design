@@ -6,22 +6,25 @@ export const data = [
         title: "Fall Limited Edition Sneakers",
         price: 125,
     },
-
+    
     {
         id: 2,
         mainImage: "./images/image-product-2.jpg",
-        thumbnail: "./images/image-product-2-thumbnail.jpg"
+        thumbnail: "./images/image-product-2-thumbnail.jpg",
+        price: 125,
     },
-
+    
     {
         id: 3,
         mainImage: "./images/image-product-3.jpg",
-        thumbnail: "./images/image-product-3-thumbnail.jpg"
+        thumbnail: "./images/image-product-3-thumbnail.jpg",
+        price: 125,
     },
-
+    
     {
         id: 4,
         mainImage: "./images/image-product-4.jpg",
-        thumbnail: "./images/image-product-4-thumbnail.jpg"
+        thumbnail: "./images/image-product-4-thumbnail.jpg",
+        price: 125,
     }
 ]

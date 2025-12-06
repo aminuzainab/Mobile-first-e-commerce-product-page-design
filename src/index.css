@@ -65,11 +65,6 @@ nav ul li {
   z-index: 999;
 }
 
-/* #backdrop {
-  position: fixed;
-  width:;
-} */
-
 @media (min-width: 375px) and (max-width: 425px) {
   .close {
     @apply top-10 left-10;
